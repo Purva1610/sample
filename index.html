@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elegant Rings</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08161f;
+      --surface: rgba(22, 40, 56, 0.92);
+      --surface-soft: rgba(16, 30, 46, 0.9);
+      --text: #f5f8fb;
+      --muted: #94a8bb;
+      --accent: #f6c16e;
+      --accent-soft: rgba(246, 193, 110, 0.16);
+      --border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.22);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: radial-gradient(circle at top, rgba(246, 193, 110, 0.12), transparent 30%),
+                  linear-gradient(180deg, #07121c 0%, #06121a 100%);
+      color: var(--text);
+    }
+
+    body {
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .hero {
+      padding: 90px 24px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(13, 28, 43, 0.95), rgba(8, 15, 23, 0.9));
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .hero-content {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 4vw, 4.5rem);
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: 1.4rem auto 0;
+      color: var(--muted);
+    }
+
+    .cta-button {
+      display: inline-flex;
+      margin-top: 2rem;
+      padding: 1rem 1.9rem;
+      background: linear-gradient(135deg, #f6c16e, #f9e4ba);
+      color: #08161f;
+      border-radius: 999px;
+      font-weight: 700;
+      box-shadow: 0 18px 40px rgba(246, 193, 110, 0.28);
+    }
+
+    main {
+      padding: 60px 24px 90px;
+    }
+
+    .section-header {
+      max-width: 720px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 3vw, 3rem);
+      margin: 0.8rem 0 0;
+    }
+
+    .cards-grid {
+      display: grid;
+      gap: 24px;
+      max-width: 1120px;
+      margin: 0 auto;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .ring-card {
+      background: rgba(10, 19, 29, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .ring-preview {
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      padding: 1.5rem;
+    }
+
+    .ring-preview::before {
+      content: "";
+      position: absolute;
+      inset: 20px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 70%);
+      opacity: 0.9;
+    }
+
+    .ring-gold {
+      background: radial-gradient(circle at 30% 20%, #f6c16e 0%, rgba(246, 193, 110, 0.18) 35%),
+                  linear-gradient(180deg, rgba(255, 234, 183, 0.12), rgba(46, 31, 18, 0.18));
+    }
+
+    .ring-silver {
+      background: radial-gradient(circle at 40% 25%, #d8e4f1 0%, rgba(216, 228, 241, 0.2) 35%),
+                  linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(44, 52, 62, 0.24));
+    }
+
+    .ring-rose {
+      background: radial-gradient(circle at 30% 25%, #f3a9be 0%, rgba(243, 169, 190, 0.25) 35%),
+                  linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(43, 24, 32, 0.22));
+    }
+
+    .ring-title {
+      position: relative;
+      z-index: 1;
+      font-size: 1.1rem;
+      color: var(--text);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .ring-details {
+      padding: 1.8rem 1.9rem 2rem;
+    }
+
+    .ring-details h3 {
+      margin: 0 0 0.8rem;
+      font-size: 1.45rem;
+    }
+
+    .ring-details p {
+      margin: 0 0 1.5rem;
+      color: var(--muted);
+    }
+
+    .price {
+      display: inline-flex;
+      padding: 0.65rem 1rem;
+      border-radius: 999px;
+      background: rgba(246, 193, 110, 0.12);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .about-section {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+      max-width: 1120px;
+      margin: 80px auto 0;
+    }
+
+    .about-image {
+      min-height: 380px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, rgba(246, 193, 110, 0.18), rgba(255, 255, 255, 0.05)),
+                  url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80');
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--shadow);
+    }
+
+    .about-copy {
+      padding: 1.5rem 1.2rem;
+      background: var(--surface-soft);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 32px;
+    }
+
+    .about-copy h2 {
+      margin-top: 0.8rem;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+    }
+
+    .about-copy p {
+      color: var(--muted);
+    }
+
+    .about-copy ul {
+      margin: 1.6rem 0 0;
+      padding-left: 1.25rem;
+      color: var(--text);
+    }
+
+    .about-copy li {
+      margin-bottom: 0.9rem;
+    }
+
+    .about-copy li::marker {
+      color: var(--accent);
+    }
+
+    .site-footer {
+      padding: 28px 24px 40px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    @media (max-width: 860px) {
+      .about-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero {
+        padding: 70px 18px;
+      }
+
+      .cards-grid {
+        gap: 18px;
+      }
+
+      .ring-preview {
+        min-height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">Jewelry Collection</p>
+      <h1>Elegant Rings for Every Moment</h1>
+      <p>Discover handcrafted designs, timeless finishes, and rings that shine as bright as your story.</p>
+      <a class="cta-button" href="#collection">Explore the collection</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="collection" class="collection-section">
+      <div class="section-header">
+        <p class="eyebrow">Featured Rings</p>
+        <h2>Signature Styles</h2>
+      </div>
+
+      <div class="cards-grid">
+        <article class="ring-card">
+          <div class="ring-preview ring-gold">
+            <span class="ring-title">Golden Halo</span>
+          </div>
+          <div class="ring-details">
+            <h3>Golden Halo</h3>
+            <p>Polished gold with a delicate halo finish, perfect for daily elegance.</p>
+            <span class="price">$120</span>
+          </div>
+        </article>
+
+        <article class="ring-card">
+          <div class="ring-preview ring-silver">
+            <span class="ring-title">Silver Whisper</span>
+          </div>
+          <div class="ring-details">
+            <h3>Silver Whisper</h3>
+            <p>Minimalist sterling silver with a soft glow, ideal for modern style.</p>
+            <span class="price">$95</span>
+          </div>
+        </article>
+
+        <article class="ring-card">
+          <div class="ring-preview ring-rose">
+            <span class="ring-title">Rose Bloom</span>
+          </div>
+          <div class="ring-details">
+            <h3>Rose Bloom</h3>
+            <p>Warm rose gold and sculpted curves for a romantic statement.</p>
+            <span class="price">$140</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="about-image"></div>
+      <div class="about-copy">
+        <p class="eyebrow">Why Choose Rings</p>
+        <h2>Designed to Celebrate Every Chapter</h2>
+        <p>Our rings are crafted to capture the moment you want to remember. From subtle bands to bold accents, each piece is made from premium materials and finished with care.</p>
+        <ul>
+          <li>Hand-finished with premium metals</li>
+          <li>Comfort fit for everyday wear</li>
+          <li>Timeless designs with a modern edge</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Elegant Rings • Crafted with care • 2026</p>
+  </footer>
+</body>
+</html>
